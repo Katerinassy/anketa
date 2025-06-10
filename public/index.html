@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анкета для студентов-практикантов</title>
+ <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="photo-placeholder">
+            <label for="photoUpload" class="photo-label">Загрузить фото</label>
+            <input type="file" id="photoUpload" accept="image/*">
+            <img id="photoPreview" class="photo-preview" alt="Фото студента">
+        </div>
+
+        <h1>Анкета для студентов-практикантов</h1>
+
+        <form id="internForm">
+            <div class="form-group">
+                <label for="fullName">Ф.И.О.</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Контактный телефон</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">Дата рождения</label>
+                <input type="date" id="birthDate" name="birthDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Сколько Вам полных лет?</label>
+                <input type="number" id="age" name="age" min="16" max="99" required>
+            </div>
+
+            <div class="form-group">
+                <label for="citizenship">Гражданство</label>
+                <input type="text" id="citizenship" name="citizenship" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Адрес проживания, ближайшее метро</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Образование</h3>
+                
+                <div class="form-group">
+                    <label for="institution">Наименование учебного заведения</label>
+                    <input type="text" id="institution" name="institution" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialty">Специальность</label>
+                    <input type="text" id="specialty" name="specialty" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Курс</label>
+                    <input type="number" id="course" name="course" min="1" max="6" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studyForm">Форма обучения</label>
+                    <select id="studyForm" name="studyForm" required>
+                        <option value="">Выберите форму обучения</option>
+                        <option value="full-time">Очная</option>
+                        <option value="part-time">Очно-заочная</option>
+                        <option value="extramural">Заочная</option>
+                        <option value="distance">Дистанционная</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gpa">Средний балл</label>
+                    <input type="number" id="gpa" name="gpa" step="0.1" min="1" max="5" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studyInterest">Вам интересно учиться?</label>
+                    <textarea id="studyInterest" name="studyInterest" required></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Информация о практике</h3>
+                
+                <div class="form-group">
+                    <label for="howKnow">Как вы узнали о нас?</label>
+                    <input type="text" id="howKnow" name="howKnow" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="practiceBenefits">Какие преимущества Вы видите в стажировке у нас?</label>
+                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="previousPractice">Проходили ли вы практику ранее?</label>
+                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="internetResearch">Вы работали с поиском информации в интернете?</label>
+                   <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientOrders">Вы рассчитывали когда-нибудь заказы клиентов?</label>
+                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamwork">Любите ли Вы работать в команде?</label>
+                    <select id="teamwork" name="teamwork" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                        <option value="sometimes">Иногда</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="practiceExpectations">Что Вы хотите получить от практики?</label>
+                    <textarea id="practiceExpectations" name="practiceExpectations" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplierMonitoring">Проводили ли Вы мониторинг поставщиков в интернете?</label>
+                    <select id="supplierMonitoring" name="supplierMonitoring" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Навыки и умения</h3>
+                
+                <div class="form-group">
+                    <label>Какими программами Вы владеете:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="powerPoint" name="skills" value="PowerPoint">
+                            <label for="powerPoint">PowerPoint</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="outlook" name="skills" value="Outlook">
+                            <label for="outlook">Outlook</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="excel" name="skills" value="Excel">
+                            <label for="excel">Excel</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="word" name="skills" value="Word">
+                            <label for="word">Word</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="1c" name="skills" value="1С">
+                            <label for="1c">1С</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="illustrator" name="skills" value="Illustrator">
+                            <label for="illustrator">Illustrator</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="photoshop" name="skills" value="Photoshop">
+                            <label for="photoshop">Photoshop</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="corel" name="skills" value="Corel Draw">
+                            <label for="corel">Corel Draw</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="practiceActivities">Чем бы Вы хотели заниматься на практике?</label>
+                    <textarea id="practiceActivities" name="practiceActivities" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="hobbies">Есть ли у Вас хобби?</label>
+                    <textarea id="hobbies" name="hobbies" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="practicalExperience">Каким практическим опытом Вы обладаете?</label>
+                    <textarea id="practicalExperience" name="practicalExperience" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="professionalTasks">Какие профессиональные задачи Вы способны решать наиболее компетентно?</label>
+                    <textarea id="professionalTasks" name="professionalTasks" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialMedia">Как Вы относитесь к социальным сетям, сколько времени проводите в них?</label>
+                    <textarea id="socialMedia" name="socialMedia" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="futureVision">Кем Вы себя видите через год?</label>
+                    <textarea id="futureVision" name="futureVision" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exhibitions">Принимали ли Вы участия в выставках? В качестве кого?</label>
+                    <textarea id="exhibitions" name="exhibitions" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="adDesign">Вы когда-нибудь подготавливали рекламные макеты к производству?</label>
+                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="printMaterials">Занимались ли Вы оформлением полиграфических материалов в виде буклетов, брошюр, плакатов, наружной рекламы и прочего?</label>
+                    <select id="printMaterials" name="printMaterials" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="creativeConcepts">Вы когда-нибудь занимались разработкой креативных концепций, фирменного стиля?</label>
+                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="3dExperience">Работали ли Вы с 3D пакетом?</label>
+                   <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="printPrep">Владеете ли Вы техникой на уровне печатной подготовки и цветоделения?</label>
+                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="multitasking">Умеете ли Вы работать над несколькими проектами одновременно?</label>
+                    <select id="multitasking" name="multitasking" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailCampaigns">Делали ли Вы email рассылки?</label>
+                    <select id="emailCampaigns" name="emailCampaigns" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="coldCalling">Занимались ли Вы когда-либо обзвоном клиентов?</label>
+                    <select id="coldCalling" name="coldCalling" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contractExperience">Есть ли у Вас опыт в оформлении договора?</label>
+                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="excelSkills">Насколько хорошо Вы работаете с Excel?</label>
+                    <select id="excelSkills" name="excelSkills" required>
+                        <option value="">Выберите уровень</option>
+                        <option value="basic">Базовый</option>
+                        <option value="intermediate">Средний</option>
+                        <option value="advanced">Продвинутый</option>
+                        <option value="expert">Эксперт</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="printerSkills">Умеете ли Вы пользоваться принтером?</label>
+                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="souvenirs">Вы работали когда-нибудь с сувенирной продукцией?</label>
+                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="writingExperience">Есть ли у Вас опыт написания текстов?</label>
+                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editingSkills">Умеете ли Вы корректировать текст?</label>
+                    <select id="editingSkills" name="editingSkills" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="logoDesign">Вы когда-нибудь создавали логотип?</label>
+                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="magazineCovers">Делали ли Вы когда-либо обложки журналов?</label>
+                   <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="businessCards">Вы когда-нибудь изготавливали визитки для предприятия?</label>
+                    <select id="businessCards" name="businessCards" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Опыт работы</h3>
+                
+                <div class="form-group">
+                    <label for="workExperience">Работали ли Вы ранее?</label>
+                    <select id="workExperience" name="workExperience" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="previousJobs">Если да, то где и кем работали?</label>
+                    <textarea id="previousJobs" name="previousJobs"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="likesToDo">Чем Вам нравится заниматься?</label>
+                    <textarea id="likesToDo" name="likesToDo" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="interestedInJob">Заинтересованы ли Вы в работе после окончания практики?</label>
+                    <select id="interestedInJob" name="interestedInJob" required>
+                        <option value="">Выберите ответ</option>
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                        <option value="maybe">Возможно</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="internshipPeriod">Укажите период стажировки</label>
+                    <input type="text" id="internshipPeriod" name="internshipPeriod" required>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Заключение</h3>
+                
+                <div class="form-group">
+                    <label for="submissionDate">Дата</label>
+                    <input type="date" id="submissionDate" name="submissionDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signature">Подпись</label>
+                    <input type="text" id="signature" name="signature" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="interviewer">Кто проводил собеседование</label>
+                    <input type="text" id="interviewer" name="interviewer" required>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Отправить анкету</button>
+                <button type="button" id="savePdf">Сохранить PDF</button>
+            </div>
+        </form>
+    </div>
+
+   
+    <script>
+    // Обработка загрузки фото
+    document.getElementById('photoUpload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Фото должно быть меньше 2MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const preview = document.getElementById('photoPreview');
+                preview.src = event.target.result;
+                preview.style.display = 'block';
+                document.querySelector('.photo-placeholder label').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Обработка отправки формы
+    document.getElementById('internForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Анкета успешно отправлена!');
+    });
+    </script>
+
+    <!-- Библиотеки -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+    // Инициализация jsPDF
+    const { jsPDF } = window.jspdf;
+
+    // Обработка кнопки сохранения в PDF
+    document.getElementById('savePdf').addEventListener('click', async function() {
+        // Показываем загрузку
+        const btn = this;
+        const originalText = btn.textContent;
+        btn.textContent = 'Генерация PDF...';
+        btn.disabled = true;
+        
+        try {
+            // Оптимизация стилей перед генерацией
+            const originalStyles = optimizeForPDF();
+            
+            // Получаем элемент формы
+            const element = document.getElementById('internForm');
+            const options = {
+                scale: 3, // Увеличенное качество
+                useCORS: true,
+                allowTaint: true,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight,
+                logging: true,
+                backgroundColor: '#ffffff'
+            };
+            
+            // Создаем PDF
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            
+            // Генерируем изображение формы
+            const canvas = await html2canvas(element, options);
+            const imgData = canvas.toDataURL('image/png', 1.0);
+            
+            // Рассчитываем размеры
+            const imgWidth = pdf.internal.pageSize.getWidth() - 40; // Отступы по 20pt с каждой стороны
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            // Добавляем изображение в PDF
+            pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+            
+            // Сохраняем PDF
+            pdf.save('Анкета_стажера.pdf');
+            
+        } catch (error) {
+            console.error('Ошибка при генерации PDF:', error);
+            alert('Произошла ошибка при создании PDF');
+        } finally {
+            // Восстанавливаем стили
+            restoreStyles();
+            
+            // Восстанавливаем кнопку
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
+    });
+
+    // Функция для оптимизации стилей перед генерацией PDF
+    function optimizeForPDF() {
+        const styles = {};
+        const elements = document.querySelectorAll('body, .container, input, textarea, select, .form-group');
+        
+        elements.forEach(el => {
+            styles[el] = {
+                fontSize: el.style.fontSize,
+                padding: el.style.padding,
+                margin: el.style.margin
+            };
+            
+            // Увеличиваем шрифты для лучшей читаемости
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
+                el.style.fontSize = '14px';
+            }
+            
+            // Убираем лишние отступы
+            if (el.classList.contains('form-group')) {
+                el.style.marginBottom = '15px';
+            }
+        });
+        
+        // Убираем фон у контейнера
+        document.querySelector('.container').style.backgroundColor = 'transparent';
+        
+        return styles;
+    }
+
+    // Функция для восстановления оригинальных стилей
+    function restoreStyles() {
+        // В реальном коде здесь нужно восстановить сохраненные стили
+        document.querySelector('.container').style.backgroundColor = 'white';
+    }
+    </script>
+</body>
+</html>
