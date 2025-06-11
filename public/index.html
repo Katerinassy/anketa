@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анкета для студентов-практикантов</title>
- <link href="styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="photo-placeholder">
             <label for="photoUpload" class="photo-label">Загрузить фото</label>
-            <input type="file" id="photoUpload" accept="image/*">
-            <img id="photoPreview" class="photo-preview" alt="Фото студента">
+            <input type="file" id="photoUpload" name="photo" accept="image/*">
+            <img id="photoPreview" class="photo-preview" alt="Фото студента" style="display: none;">
         </div>
 
         <h1>Анкета для студентов-практикантов</h1>
@@ -102,17 +102,17 @@
 
                 <div class="form-group">
                     <label for="previousPractice">Проходили ли вы практику ранее?</label>
-                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="previousPractice" name="previousPractice" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="internetResearch">Вы работали с поиском информации в интернете?</label>
-                   <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="internetResearch" name="internetResearch" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="clientOrders">Вы рассчитывали когда-нибудь заказы клиентов?</label>
-                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="clientOrders" name="clientOrders" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -218,7 +218,7 @@
 
                 <div class="form-group">
                     <label for="adDesign">Вы когда-нибудь подготавливали рекламные макеты к производству?</label>
-                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="adDesign" name="adDesign" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -232,17 +232,17 @@
 
                 <div class="form-group">
                     <label for="creativeConcepts">Вы когда-нибудь занимались разработкой креативных концепций, фирменного стиля?</label>
-                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="creativeConcepts" name="creativeConcepts" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="3dExperience">Работали ли Вы с 3D пакетом?</label>
-                   <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="3dExperience" name="3dExperience" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="printPrep">Владеете ли Вы техникой на уровне печатной подготовки и цветоделения?</label>
-                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="printPrep" name="printPrep" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -274,7 +274,7 @@
 
                 <div class="form-group">
                     <label for="contractExperience">Есть ли у Вас опыт в оформлении договора?</label>
-                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="contractExperience" name="contractExperience" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -290,17 +290,17 @@
 
                 <div class="form-group">
                     <label for="printerSkills">Умеете ли Вы пользоваться принтером?</label>
-                    <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="printerSkills" name="printerSkills" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="souvenirs">Вы работали когда-нибудь с сувенирной продукцией?</label>
-                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="souvenirs" name="souvenirs" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="writingExperience">Есть ли у Вас опыт написания текстов?</label>
-                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="writingExperience" name="writingExperience" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -314,12 +314,12 @@
 
                 <div class="form-group">
                     <label for="logoDesign">Вы когда-нибудь создавали логотип?</label>
-                  <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="logoDesign" name="logoDesign" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="magazineCovers">Делали ли Вы когда-либо обложки журналов?</label>
-                   <textarea id="practiceBenefits" name="practiceBenefits" required></textarea>
+                    <textarea id="magazineCovers" name="magazineCovers" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -396,98 +396,125 @@
         </form>
     </div>
 
-   
-    <script>
-    // Обработка загрузки фото
-    document.getElementById('photoUpload').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size > 2 * 1024 * 1024) {
-                alert('Фото должно быть меньше 2MB');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const preview = document.getElementById('photoPreview');
-                preview.src = event.target.result;
-                preview.style.display = 'block';
-                document.querySelector('.photo-placeholder label').style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Обработка отправки формы
-    document.getElementById('internForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Анкета успешно отправлена!');
-    });
-    </script>
-
     <!-- Библиотеки -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
-    // Инициализация jsPDF
-    const { jsPDF } = window.jspdf;
-
-    // Обработка кнопки сохранения в PDF
-   document.getElementById('savePdf').addEventListener('click', async function() {
-    const btn = this;
-    const originalText = btn.textContent;
-    btn.textContent = 'Генерация PDF...';
-    btn.disabled = true;
-
-    try {
-        const element = document.getElementById('internForm');
-        const options = {
-            scale: 3,
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-            windowWidth: element.scrollWidth,
-            windowHeight: element.scrollHeight,
-            backgroundColor: '#ffffff'
-        };
-
-        const pdf = new jsPDF('p', 'pt', 'a4');
-        const canvas = await html2canvas(element, options);
-        const imgData = canvas.toDataURL('image/png', 1.0);
-
-        // Рассчитываем размеры
-        const imgWidth = pdf.internal.pageSize.getWidth() - 40; // Отступы по 20pt с каждой стороны
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-        // Высота страницы A4 в пунктах
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        let heightLeft = imgHeight;
-
-        let position = 20; // Начальная позиция по Y
-
-        // Добавляем изображение в PDF
-        while (heightLeft >= 0) {
-            pdf.addImage(imgData, 'PNG', 20, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-            position -= pageHeight; // Перемещаем позицию вверх на высоту страницы
-            if (heightLeft >= 0) { // Если еще есть высота для добавления, добавляем новую страницу
-                pdf.addPage();
+        // Обработка загрузки фото
+        document.getElementById('photoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Фото должно быть меньше 2MB');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('photoPreview');
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                    document.querySelector('.photo-placeholder label').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
             }
-        }
+        });
 
-        // Сохраняем PDF
-        pdf.save('Анкета_стажера.pdf');
+        // Обработка отправки формы
+        document.getElementById('internForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.textContent = 'Отправка...';
+            submitButton.disabled = true;
 
-    } catch (error) {
-        console.error('Ошибка при генерации PDF:', error);
-        alert('Произошла ошибка при создании PDF');
-    } finally {
-        btn.textContent = originalText;
-        btn.disabled = false;
-    }
-});
-</script>
+            // Логируем данные формы для отладки
+            console.log('Отправка формы:', Object.fromEntries(formData));
+
+            try {
+                const response = await fetch('http://localhost:3000/api/application', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                console.log('Ответ сервера:', result);
+
+                if (response.ok) {
+                    alert('Анкета успешно отправлена! ID: ' + result.applicationId);
+                    form.reset();
+                    const photoPreview = document.getElementById('photoPreview');
+                    photoPreview.src = '';
+                    photoPreview.style.display = 'none';
+                    document.querySelector('.photo-placeholder label').style.display = 'block';
+                } else {
+                    alert('Ошибка при отправке анкеты: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Ошибка при отправке:', error);
+                alert('Произошла ошибка при отправке анкеты. Пожалуйста, проверьте соединение с сервером.');
+            } finally {
+                submitButton.textContent = 'Отправить анкету';
+                submitButton.disabled = false;
+            }
+        });
+
+        // Инициализация jsPDF
+        const { jsPDF } = window.jspdf;
+
+        // Обработка кнопки сохранения в PDF
+        document.getElementById('savePdf').addEventListener('click', async function() {
+            const btn = this;
+            const originalText = btn.textContent;
+            btn.textContent = 'Генерация PDF...';
+            btn.disabled = true;
+
+            try {
+                const element = document.querySelector('.container');
+                const options = {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: false,
+                    logging: false,
+                    windowWidth: element.scrollWidth,
+                    windowHeight: element.scrollHeight,
+                    backgroundColor: '#ffffff'
+                };
+
+                const canvas = await html2canvas(element, options);
+                const imgData = canvas.toDataURL('image/png', 1.0);
+
+                const pdf = new jsPDF('p', 'pt', 'a4');
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const margin = 20;
+                const imgWidth = pageWidth - 2 * margin;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                let heightLeft = imgHeight;
+                let position = margin;
+
+                while (heightLeft >= 0) {
+                    pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight - 2 * margin;
+                    position -= (pageHeight - 2 * margin);
+                    if (heightLeft > 0) {
+                        pdf.addPage();
+                    }
+                }
+
+                pdf.save('Анкета_стажера.pdf');
+            } catch (error) {
+                console.error('Ошибка при генерации PDF:', error);
+                alert('Произошла ошибка при создании PDF. Пожалуйста, проверьте консоль браузера для деталей.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>
