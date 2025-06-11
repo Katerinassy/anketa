@@ -1,144 +1,96 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        .photo-placeholder {
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            border: 2px dashed #ccc;
-            border-radius: 5px;
-        }
-        .photo-preview {
-            max-width: 150px;
-            max-height: 200px;
-            display: none;
-            margin-top: 10px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="tel"],
-        input[type="date"],
-        input[type="email"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        .checkbox-group {
-            margin: 10px 0;
-        }
-        .checkbox-item {
-            margin-right: 15px;
-            display: inline-block;
-        }
-        .buttons {
-            margin-top: 20px;
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        .section {
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        .section-title {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
-        @media (max-width: 480px) {
+/* Стили для фото */
+.photo-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.photo-preview {
+    max-width: 150px;
+    max-height: 200px;
+    display: block;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+}
+
+/* Стили для PDF */
+@media print {
     body {
-        padding: 10px;
+        font-size: 12pt;
+        line-height: 1.4;
     }
+    
     .container {
-        padding: 10px;
-        border: none;
-        background-color: transparent;
-    }
-    h1 {
-        font-size: 1.5rem;
-    }
-    .photo-placeholder {
-        margin: 10px 0;
-        padding: 10px;
-    }
-    .photo-preview {
-        max-width: 120px;
-    }
-    .checkbox-item {
-        display: block;
-        margin-right: 0;
-        margin-bottom: 8px;
-    }
-    .buttons {
-        display: flex;
-        flex-direction: column;
-    }
-    button {
         width: 100%;
-        margin: 5px 0;
+        padding: 10px;
+        margin: 0;
     }
+    
+    .photo-container {
+        page-break-inside: avoid;
+    }
+    
     .section {
-        margin-top: 20px;
+        page-break-inside: avoid;
+    }
+    
+    button {
+        display: none !important;
     }
 }
 
+/* Улучшенные стили формы */
+.form-group {
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
 
-@media (max-width: 360px) {
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
     body {
-        padding: 8px;
-        font-size: 0.95rem;
+        padding: 10px;
     }
-    input[type="text"],
-    input[type="tel"],
-    input[type="date"],
-    input[type="email"],
-    input[type="number"],
-    textarea,
-    select {
-        padding: 6px;
+    
+    .container {
+        padding: 10px;
     }
 }
