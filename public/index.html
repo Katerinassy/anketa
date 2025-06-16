@@ -9,34 +9,13 @@
 </head>
 
 <body>
- <div class="container">
-    <div class="photo-placeholder">
-        <div class="placeholder-text">Место для фотографии</div>
-        <label for="photoUpload" class="photo-label">Загрузить</label>
-        <input type="file" id="photoUpload" name="photo" accept="image/*">
-        <img id="photoPreview" class="photo-preview" alt="Фото студента">
-    </div>
-</div>
-
-<script>
-document.getElementById('photoUpload').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('photoPreview');
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-            
-            // Скрываем текст placeholder
-            document.querySelector('.placeholder-text').style.display = 'none';
-            // Также можно скрыть кнопку загрузки, если нужно
-            document.querySelector('.photo-label').style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-    }
-});
-</script>
+    <div class="container">
+        <div class="photo-placeholder">
+            <div class="placeholder-text">Место для фотографии</div>
+            <label for="photoUpload" class="photo-label">Загрузить</label>
+            <input type="file" id="photoUpload" name="photo" accept="image/*">
+            <img id="photoPreview" class="photo-preview" alt="Фото студента">
+        </div>
 
         <h1>Анкета для студентов-практикантов</h1>
 
@@ -429,6 +408,10 @@ document.getElementById('photoUpload').addEventListener('change', function(event
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
+        // Проверка загрузки библиотек
+        console.log('jsPDF:', typeof window.jspdf !== 'undefined');
+        console.log('html2canvas:', typeof html2canvas !== 'undefined');
+
         // Обработка загрузки фото
         document.getElementById('photoUpload').addEventListener('change', function (e) {
             const file = e.target.files[0];
@@ -437,13 +420,15 @@ document.getElementById('photoUpload').addEventListener('change', function(event
                     alert('Фото должно быть меньше 2MB');
                     return;
                 }
-
                 const reader = new FileReader();
                 reader.onload = function (event) {
                     const preview = document.getElementById('photoPreview');
+                    const label = document.querySelector('.photo-label');
                     preview.src = event.target.result;
                     preview.style.display = 'block';
-                    document.querySelector('.photo-placeholder label').style.display = 'none';
+                    label.style.display = 'none'; // Скрываем текст "Загрузить"
+                    document.querySelector('.placeholder-text').style.display = 'none';
+                    console.log('Изображение загружено, src:', preview.src);
                 };
                 reader.readAsDataURL(file);
             }
@@ -452,15 +437,12 @@ document.getElementById('photoUpload').addEventListener('change', function(event
         // Обработка отправки формы
         document.getElementById('internForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-
+            console.log('Форма отправляется...');
             const form = this;
             const formData = new FormData(form);
             const submitButton = form.querySelector('button[type="submit"]');
             submitButton.textContent = 'Отправка...';
             submitButton.disabled = true;
-
-            // Логируем данные формы для отладки
-            console.log('Отправка формы:', Object.fromEntries(formData));
 
             try {
                 const response = await fetch('http://localhost:3000/api/application', {
@@ -477,7 +459,8 @@ document.getElementById('photoUpload').addEventListener('change', function(event
                     const photoPreview = document.getElementById('photoPreview');
                     photoPreview.src = '';
                     photoPreview.style.display = 'none';
-                    document.querySelector('.photo-placeholder label').style.display = 'block';
+                    document.querySelector('.photo-label').style.display = 'block'; // Возвращаем "Загрузить"
+                    document.querySelector('.placeholder-text').style.display = 'block';
                 } else {
                     alert('Ошибка при отправке анкеты: ' + result.error);
                 }
@@ -493,8 +476,8 @@ document.getElementById('photoUpload').addEventListener('change', function(event
         // Инициализация jsPDF
         const { jsPDF } = window.jspdf;
 
-        // Обработка кнопки сохранения в PDF
         document.getElementById('savePdf').addEventListener('click', async function () {
+            console.log('Начало генерации PDF...');
             const btn = this;
             const originalText = btn.textContent;
             btn.textContent = 'Генерация PDF...';
@@ -502,19 +485,44 @@ document.getElementById('photoUpload').addEventListener('change', function(event
 
             try {
                 const element = document.querySelector('.container');
+                if (!element) {
+                    console.error('Элемент .container не найден');
+                    throw new Error('Элемент .container не найден');
+                }
+                console.log('Элемент .container найден, высота:', element.scrollHeight);
+
+                const photoPreview = document.getElementById('photoPreview');
+                console.log('Photo Preview src:', photoPreview ? photoPreview.src : 'Не найден');
+                console.log('Photo Preview display:', photoPreview ? photoPreview.style.display : 'Не найден');
+
+                if (photoPreview && photoPreview.src && photoPreview.style.display !== 'none') {
+                    await new Promise(resolve => {
+                        photoPreview.onload = resolve;
+                        if (photoPreview.complete && photoPreview.naturalWidth > 0) {
+                            console.log('Изображение готово, naturalWidth:', photoPreview.naturalWidth);
+                            resolve();
+                        } else {
+                            console.log('Перезапуск загрузки изображения...');
+                            photoPreview.src = photoPreview.src;
+                        }
+                    });
+                }
+
                 const options = {
                     scale: 2,
                     useCORS: true,
-                    allowTaint: false,
-                    logging: false,
+                    allowTaint: true,
+                    logging: true,
                     windowWidth: element.scrollWidth,
                     windowHeight: element.scrollHeight,
                     backgroundColor: '#ffffff'
                 };
 
+                console.log('Запуск html2canvas...');
                 const canvas = await html2canvas(element, options);
-                const imgData = canvas.toDataURL('image/png', 1.0);
+                console.log('html2canvas завершен, canvas высота:', canvas.height);
 
+                const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'pt', 'a4');
                 const pageWidth = pdf.internal.pageSize.getWidth();
                 const pageHeight = pdf.internal.pageSize.getHeight();
@@ -534,10 +542,11 @@ document.getElementById('photoUpload').addEventListener('change', function(event
                     }
                 }
 
+                console.log('Сохранение PDF...');
                 pdf.save('Анкета_стажера.pdf');
             } catch (error) {
                 console.error('Ошибка при генерации PDF:', error);
-                alert('Произошла ошибка при создании PDF. Пожалуйста, проверьте консоль браузера для деталей.');
+                alert('Произошла ошибка при создании PDF. Проверьте консоль браузера для деталей.');
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
