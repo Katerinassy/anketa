@@ -19,7 +19,7 @@
 
         <h1>Анкета для студентов-практикантов</h1>
 
-        <form id="internForm">
+        <form id="internForm" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="fullName">Ф.И.О.</label>
                 <input type="text" id="fullName" name="fullName" required>
@@ -445,11 +445,13 @@
             submitButton.disabled = true;
 
             try {
+                console.log('Отправка запроса на http://localhost:3000/api/application...');
                 const response = await fetch('http://localhost:3000/api/application', {
                     method: 'POST',
                     body: formData
                 });
 
+                console.log('Ответ получен, статус:', response.status);
                 const result = await response.json();
                 console.log('Ответ сервера:', result);
 
@@ -459,14 +461,14 @@
                     const photoPreview = document.getElementById('photoPreview');
                     photoPreview.src = '';
                     photoPreview.style.display = 'none';
-                    document.querySelector('.photo-label').style.display = 'block'; // Возвращаем "Загрузить"
+                    document.querySelector('.photo-label').style.display = 'block';
                     document.querySelector('.placeholder-text').style.display = 'block';
                 } else {
-                    alert('Ошибка при отправке анкеты: ' + result.error);
+                    alert('Ошибка при отправке анкеты: ' + (result.error || 'Неизвестная ошибка, статус: ' + response.status));
                 }
             } catch (error) {
                 console.error('Ошибка при отправке:', error);
-                alert('Произошла ошибка при отправке анкеты. Пожалуйста, проверьте соединение с сервером.');
+                alert('Произошла ошибка при отправке анкеты. Пожалуйста, проверьте соединение с сервером или консоль для деталей.');
             } finally {
                 submitButton.textContent = 'Отправить анкету';
                 submitButton.disabled = false;
@@ -552,6 +554,24 @@
                 btn.disabled = false;
             }
         });
+
+        // Автоматический расчет возраста
+        const birthDateInput = document.getElementById('birthDate');
+        const ageInput = document.getElementById('age');
+        if (birthDateInput && ageInput) {
+            birthDateInput.addEventListener('change', function () {
+                const birthDate = new Date(this.value);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+
+                ageInput.value = age >= 0 ? age : '';
+            });
+        }
     </script>
 </body>
 

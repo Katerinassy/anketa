@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalName).toLowerCase());
+        cb(null, uniqueSuffix + path.extname(file.originalname).toLowerCase());
     }
 });
 
@@ -41,7 +41,7 @@ const upload = multer({
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png|gif/;
         const mimetype = filetypes.test(file.mimetype);
-        const extname = filetypes.test(path.extname(file.originalName).toLowerCase());
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         
         if (mimetype && extname) {
             return cb(null, true);
@@ -52,7 +52,7 @@ const upload = multer({
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'], // Возможные порты клиента
+    origin: '*', // Разрешаем все источники для тестов (замените на конкретные порты в продакшене)
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
@@ -106,7 +106,7 @@ app.post('/api/application', upload.single('photo'), async (req, res) => {
         // Обработка фото
         let photoPath = null;
         if (req.file) {
-            const photoExt = path.extname(req.file.originalName).toLowerCase() || '.jpg';
+            const photoExt = path.extname(req.file.originalname).toLowerCase() || '.jpg';
             photoPath = path.join(studentDir, `photo${photoExt}`);
             console.log('Перемещение фото:', req.file.path, '->', photoPath);
             await fs.rename(req.file.path, photoPath);

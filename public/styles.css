@@ -14,14 +14,14 @@ body {
     padding: 20px;
     border-radius: 5px;
     position: relative;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 30px;
     color: #2c3e50;
-    padding-right: 140px; 
+    padding-right: 140px;
 }
 
 .photo-placeholder {
@@ -66,7 +66,7 @@ h1 {
 /* Стили формы */
 .form-group {
     margin-bottom: 15px;
-    width: 100%; /* Изменено с calc(100% - 140px) */
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -138,17 +138,17 @@ button:hover {
     .container {
         padding: 15px;
     }
-    
+
     h1 {
         padding-right: 0;
-        margin-bottom: 100px; /* Место для фото, которое теперь будет под заголовком */
+        margin-bottom: 100px;
     }
-    
+
     .photo-placeholder {
         position: static;
         margin: 0 auto 20px;
     }
-    
+
     .form-group {
         width: 100%;
     }
@@ -158,31 +158,31 @@ button:hover {
     body {
         padding: 10px;
     }
-    
+
     .container {
         padding: 10px;
     }
-    
+
     h1 {
         font-size: 1.5rem;
     }
-    
+
     .checkbox-item {
         display: block;
         margin-right: 0;
         margin-bottom: 8px;
     }
-    
+
     .buttons {
         display: flex;
         flex-direction: column;
     }
-    
+
     button {
         width: 100%;
         margin: 5px 0;
     }
-    
+
     .section {
         margin-top: 20px;
     }
@@ -193,7 +193,7 @@ button:hover {
         padding: 8px;
         font-size: 0.95rem;
     }
-    
+
     input[type="text"],
     input[type="tel"],
     input[type="date"],
