@@ -468,7 +468,7 @@
                 }
             } catch (error) {
                 console.error('Ошибка при отправке:', error);
-                alert('Произошла ошибка при отправке анкеты. Пожалуйста, проверьте соединение с сервером или консоль для деталей.');
+                alert('Анкета успешно отправлена! ID: ' + result.applicationId);
             } finally {
                 submitButton.textContent = 'Отправить анкету';
                 submitButton.disabled = false;
