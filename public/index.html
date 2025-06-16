@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анкета для студентов-практикантов</title>
     <link href="styles.css" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <div class="photo-placeholder">
-            <label for="photoUpload" class="photo-label">Загрузить фото</label>
-            <input type="file" id="photoUpload" name="photo" accept="image/*">
-            <img id="photoPreview" class="photo-preview" alt="Фото студента" style="display: none;">
-        </div>
+ <div class="container">
+    <div class="photo-placeholder">
+        <div class="placeholder-text">Место для фотографии</div>
+        <label for="photoUpload" class="photo-label">Загрузить</label>
+        <input type="file" id="photoUpload" name="photo" accept="image/*">
+        <img id="photoPreview" class="photo-preview" alt="Фото студента">
+    </div>
+</div>
+
+<script>
+document.getElementById('photoUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('photoPreview');
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            
+            // Скрываем текст placeholder
+            document.querySelector('.placeholder-text').style.display = 'none';
+            // Также можно скрыть кнопку загрузки, если нужно
+            document.querySelector('.photo-label').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 
         <h1>Анкета для студентов-практикантов</h1>
 
@@ -49,7 +73,7 @@
 
             <div class="section">
                 <h3 class="section-title">Образование</h3>
-                
+
                 <div class="form-group">
                     <label for="institution">Наименование учебного заведения</label>
                     <input type="text" id="institution" name="institution" required>
@@ -89,7 +113,7 @@
 
             <div class="section">
                 <h3 class="section-title">Информация о практике</h3>
-                
+
                 <div class="form-group">
                     <label for="howKnow">Как вы узнали о нас?</label>
                     <input type="text" id="howKnow" name="howKnow" required>
@@ -142,7 +166,7 @@
 
             <div class="section">
                 <h3 class="section-title">Навыки и умения</h3>
-                
+
                 <div class="form-group">
                     <label>Какими программами Вы владеете:</label>
                     <div class="checkbox-group">
@@ -197,12 +221,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="professionalTasks">Какие профессиональные задачи Вы способны решать наиболее компетентно?</label>
+                    <label for="professionalTasks">Какие профессиональные задачи Вы способны решать наиболее
+                        компетентно?</label>
                     <textarea id="professionalTasks" name="professionalTasks" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="socialMedia">Как Вы относитесь к социальным сетям, сколько времени проводите в них?</label>
+                    <label for="socialMedia">Как Вы относитесь к социальным сетям, сколько времени проводите в
+                        них?</label>
                     <textarea id="socialMedia" name="socialMedia" required></textarea>
                 </div>
 
@@ -222,7 +248,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="printMaterials">Занимались ли Вы оформлением полиграфических материалов в виде буклетов, брошюр, плакатов, наружной рекламы и прочего?</label>
+                    <label for="printMaterials">Занимались ли Вы оформлением полиграфических материалов в виде буклетов,
+                        брошюр, плакатов, наружной рекламы и прочего?</label>
                     <select id="printMaterials" name="printMaterials" required>
                         <option value="">Выберите ответ</option>
                         <option value="yes">Да</option>
@@ -231,7 +258,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="creativeConcepts">Вы когда-нибудь занимались разработкой креативных концепций, фирменного стиля?</label>
+                    <label for="creativeConcepts">Вы когда-нибудь занимались разработкой креативных концепций,
+                        фирменного стиля?</label>
                     <textarea id="creativeConcepts" name="creativeConcepts" required></textarea>
                 </div>
 
@@ -334,7 +362,7 @@
 
             <div class="section">
                 <h3 class="section-title">Опыт работы</h3>
-                
+
                 <div class="form-group">
                     <label for="workExperience">Работали ли Вы ранее?</label>
                     <select id="workExperience" name="workExperience" required>
@@ -372,7 +400,7 @@
 
             <div class="section">
                 <h3 class="section-title">Заключение</h3>
-                
+
                 <div class="form-group">
                     <label for="submissionDate">Дата</label>
                     <input type="date" id="submissionDate" name="submissionDate" required>
@@ -402,16 +430,16 @@
 
     <script>
         // Обработка загрузки фото
-        document.getElementById('photoUpload').addEventListener('change', function(e) {
+        document.getElementById('photoUpload').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 if (file.size > 2 * 1024 * 1024) {
                     alert('Фото должно быть меньше 2MB');
                     return;
                 }
-                
+
                 const reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     const preview = document.getElementById('photoPreview');
                     preview.src = event.target.result;
                     preview.style.display = 'block';
@@ -422,9 +450,9 @@
         });
 
         // Обработка отправки формы
-        document.getElementById('internForm').addEventListener('submit', async function(e) {
+        document.getElementById('internForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             const form = this;
             const formData = new FormData(form);
             const submitButton = form.querySelector('button[type="submit"]');
@@ -466,7 +494,7 @@
         const { jsPDF } = window.jspdf;
 
         // Обработка кнопки сохранения в PDF
-        document.getElementById('savePdf').addEventListener('click', async function() {
+        document.getElementById('savePdf').addEventListener('click', async function () {
             const btn = this;
             const originalText = btn.textContent;
             btn.textContent = 'Генерация PDF...';
@@ -517,4 +545,5 @@
         });
     </script>
 </body>
+
 </html>
